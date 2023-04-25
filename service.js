@@ -6,7 +6,7 @@ router.get('',(request,response)=>{
 })
 router.get('/:id',(request,response)=>{
     if(request.params.id<Arraylength){
-    response.send(`This is id Value : ${userData[request.params.id].name}`)
+    response.send(`This is id Value : ${request.UseName.name}`)
     }
     else{
         response.send("Invalid!")
@@ -25,6 +25,10 @@ const userData=[{
 {
     name:"Nagaraj"
 }]
-
+ 
+router.param('id',(request,response,next,id)=>{
+    request.UseName=userData[id];
+    next();
+})
 const Arraylength=userData.length
 module.exports=router
